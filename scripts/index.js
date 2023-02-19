@@ -12,7 +12,6 @@ function MakeBook(title, author, pages) {
 function createBookCard(book, i) {
   const newCard = document.createElement('div');
   newCard.setAttribute('class', 'book-wrapper');
-  newCard.setAttribute('data-index', `${i}`);
   const bookTitle = document.createElement('p');
   bookTitle.innerText = book.title;
   const bookAuthor = document.createElement('p');
@@ -43,6 +42,7 @@ function createBookCard(book, i) {
 
   const div = document.createElement('div');
   div.setAttribute('class', 'card-info');
+  div.setAttribute('data-index', `${i}`);
   div.append(newCard);
   bookList.appendChild(div);
 }
