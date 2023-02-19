@@ -15,26 +15,29 @@
 <body>
     <header class="heading">
         <h1 class="heading-title">Library</h1>
-        <span class="add-book-icon"><i class="fa-solid fa-plus"></i></span>
+        <span class="add-book-icon"><i class="fa-solid fa-plus" title="Add new book"></i></span>
     </header>
 
     <div class="overlay"></div>
 
     <div class="form-content">
-        <form action="/" class="new-book-form">
+        <form action="#" class="new-book-form">
             <label for="new-title" class="title-label">Title</label>
-            <input type="text" id="new-title" class="new-title" name="title" required />
+            <input type="text" id="new-title" class="new-title" name="title" required /> <span class="error"></span>
             <label for="new-author" class="author-label">Author</label>
-            <input type="text" id="new-author" class="new-author" name="author" required />
+            <input type="text" id="new-author" class="new-author" name="author" required /> <span class="error"></span>
             <label for="new-pages" class="pages-label">Pages</label>
             <input type="number" id="new-pages" class="new-pages" name="pages" pattern="[-+]?[0-9]*[.,]?[0-9]+"
-                required />
-            <input type="submit" class="submit" value="Submit" />
+                required /> <span class="error"></span>
+            <button class="submit" type="submit">Submit</button>
         </form>
     </div>
 
-
     <div class="book-card-section"></div>
+    <footer>
+        <p class="info">Dustin Miller 2023 <a href="https://github.com/MrDustinMiller" target="_blank"
+                class="github-logo"><i class="fa-brands fa-square-github fa-xl"></i></a></p>
+    </footer>
 </body>
 
 </html>
