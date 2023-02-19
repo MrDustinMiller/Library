@@ -1,6 +1,6 @@
-const submitButton = document.querySelector('.submit');
 const bookList = document.querySelector('.book-card-section');
 const myLibrary = [];
+const bookForm = document.querySelector('.new-book-form');
 
 function MakeBook(title, author, pages) {
   this.title = title;
@@ -104,7 +104,7 @@ function getNewUserBook() {
   addBookToLibrary(newBook);
 }
 
-submitButton.addEventListener('click', (e) => {
+bookForm.addEventListener('submit', (e) => {
   e.preventDefault();
   getNewUserBook();
 });
