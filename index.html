@@ -6,29 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
+    <script src="https://kit.fontawesome.com/deb3d163c0.js" crossorigin="anonymous"></script>
     <script src="scripts/index.js" defer></script>
-    <script src="scripts/controls.js" defer></script>
+    <script src="scripts/form.js" defer></script>
     <title>Library | Dustin Miller</title>
 </head>
 
 <body>
-    <main class="main-content">
-        <button class="insert-book">Log Book</button>
-        <form action="/" class="new-book-form">
-            <label for="new-title" class="title-label">Title</label>
-            <input type="text" id="new-title" class="new-title">
-            <label for="new-author" class="author-label">Author</label>
-            <input type="text" id="new-author" class="new-author">
-            <label for="new-pages" class="pages-label">Pages</label>
-            <input type="text" id="new-pages" class="new-pages">
-            <label for="new-read" class="read-label">Read?</label>
-            <input type="text" id="new-read" class="new-read">
-            <input type="button" class="submit" value="Submit">
-        </form>
-        <div class="book-card-section">
-        </div>
-    </main>
+    <header class="heading">
+        <h1 class="heading-title">Library</h1>
+        <span class="add-book-icon"><i class="fa-solid fa-plus"></i></span>
+    </header>
 
+    <div class="overlay"></div>
+
+    <div class="form-content">
+        <form action="/" class="new-book-form">
+            <i class="fa-solid fa-xmark"></i>
+            <label for="new-title" class="title-label">Title</label>
+            <input type="text" id="new-title" class="new-title" name="title" required />
+            <label for="new-author" class="author-label">Author</label>
+            <input type="text" id="new-author" class="new-author" name="author" required />
+            <label for="new-pages" class="pages-label">Pages</label>
+            <input type="text" id="new-pages" class="new-pages" name="pages" required />
+            <button type="button" class="submit" value="Submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="book-card-section"></div>
 </body>
 
 </html>
