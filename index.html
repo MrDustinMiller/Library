@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles/style.css">
@@ -22,16 +22,17 @@
 
     <div class="form-content">
         <form action="/" class="new-book-form">
-            <i class="fa-solid fa-xmark"></i>
             <label for="new-title" class="title-label">Title</label>
             <input type="text" id="new-title" class="new-title" name="title" required />
             <label for="new-author" class="author-label">Author</label>
             <input type="text" id="new-author" class="new-author" name="author" required />
             <label for="new-pages" class="pages-label">Pages</label>
-            <input type="text" id="new-pages" class="new-pages" name="pages" required />
-            <button type="button" class="submit" value="Submit">Submit</button>
+            <input type="number" id="new-pages" class="new-pages" name="pages" pattern="[-+]?[0-9]*[.,]?[0-9]+"
+                required />
+            <input type="submit" class="submit" value="Submit" />
         </form>
     </div>
+
 
     <div class="book-card-section"></div>
 </body>
