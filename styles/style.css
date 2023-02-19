@@ -68,15 +68,6 @@ label {
            box-shadow: 8px 8px 12px var(--accent-color);
 }
 
-/* .new-book-form i {
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-row-align: end;
-    -ms-grid-column-align: end;
-    place-self: end;
-    cursor: pointer;
-} */
-
 .book-card-section {
     z-index: -2;
     position: absolute;
@@ -130,7 +121,7 @@ label {
     padding: 0.25em;
 }
 
-p {
+p:not(.info) {
     line-height: 2em;
     -webkit-box-shadow: 0px 1.5px 0px var(--accent-color);
             box-shadow: 0px 1.5px 0px var(--accent-color);
@@ -144,7 +135,7 @@ p {
     display: flex;
     -webkit-box-pack:justify;
         -ms-flex-pack:justify;
-            justify-content:space-between;
+            justify-content:space-around;
     padding: 1rem;
     -webkit-box-shadow: 0px 0px 5px black;
             box-shadow: 0px 0px 5px black;
@@ -170,4 +161,27 @@ p {
 input[type="text"] {
     border-radius: 3px;
     border: none;
+}
+
+footer { 
+  position: absolute;
+  bottom: 0em; 
+  width: 250px;
+ 
+}
+
+.info {
+    font-size: 1.5rem;
+    width: 100%;
+    margin: 0em 43vw; 
+}
+
+.fa-square-github {
+    position: relative;
+    bottom: 0.15em;
+}
+
+footer a {
+    color: black;
+    margin-left: 0.5em;
 }
