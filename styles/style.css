@@ -33,7 +33,7 @@ body {
     visibility: hidden;
     height: 92vh;
     width: 100vw;
-    background-color: var(--primary-color)
+    background-color: rgba(0, 0, 0, 0.7)
 }
 
 label {
@@ -68,14 +68,14 @@ label {
            box-shadow: 8px 8px 12px var(--accent-color);
 }
 
-.new-book-form i {
+/* .new-book-form i {
     display: -ms-grid;
     display: grid;
     -ms-grid-row-align: end;
     -ms-grid-column-align: end;
     place-self: end;
     cursor: pointer;
-}
+} */
 
 .book-card-section {
     z-index: -2;
@@ -158,7 +158,7 @@ p {
     cursor: pointer;
     -webkit-transition: 0.2s all;
     -o-transition: 0.2s all;
-    transition: 0.2s all;
+    transition: 0.15s all;
 }
 
 .fa-plus:active {
