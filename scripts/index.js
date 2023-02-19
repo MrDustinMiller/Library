@@ -96,8 +96,7 @@ function addBookToLibrary(newBook) {
   displayBooks();
 }
 
-function getNewUserBook(e) {
-  e.preventDefault();
+function getNewUserBook() {
   const title = document.querySelector('.new-title').value;
   const author = document.querySelector('.new-author').value;
   const pages = document.querySelector('.new-pages').value;
@@ -106,14 +105,14 @@ function getNewUserBook(e) {
 }
 
 submitButton.addEventListener('click', (e) => {
-  getNewUserBook(e);
+  e.preventDefault();
+  getNewUserBook();
 });
 
 MakeBook.prototype.readBook = function () {
   if (document.querySelector('.fa-circle-xmark').style.color === 'red') {
     this.read = false;
   } else this.read = true;
-  console.log(this.read);
 };
 
 MakeBook.prototype.info = function () {
