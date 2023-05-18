@@ -10,9 +10,9 @@
 
 :root {
     --primary-color:#ffffff;
-    --secondary-color:#e2e8f0;
+    --secondary-color:#279af1;
     --overlay-color:#f1f5f9;
-    --accent-color: #444;
+    --accent-color: rgb(0, 0, 0);
     --system-ui: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
@@ -47,7 +47,7 @@ label {
 
 .new-book-form {
     z-index: 1; 
-    background-color: var(--secondary-color);
+    background-color: #f7f7ff;
    visibility: hidden;
    display: -webkit-box;
    display: -ms-flexbox;
@@ -102,8 +102,6 @@ label {
     font-weight: bold;
     -webkit-box-shadow: 4px 4px 12px var(--accent-color);
             box-shadow: 4px 4px 12px var(--accent-color);
-    border-left: 6px solid black;
-    /* background-color: var(--secondary-color); */
 }
 
 .read-section {
@@ -149,6 +147,8 @@ p:not(.info) {
     cursor: pointer;
     -webkit-transition: 0.2s all;
     -o-transition: 0.2s all;
+    -webkit-transition: 0.15s all;
+    -o-transition: 0.15s all;
     transition: 0.15s all;
 }
 
@@ -159,10 +159,19 @@ p:not(.info) {
 }
 
 input[type="text"] {
-    border-radius: 3px;
-    border: none;
+    border-radius: 8px;
+    border: 1.75px solid black;
 }
 
+input[type="number"] {
+    border-radius: 8px;
+    border: 1.75px solid black;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+  }
+  
 footer { 
   position: absolute;
   bottom: 0em; 

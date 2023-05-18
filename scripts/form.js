@@ -1,27 +1,40 @@
-const form = document.querySelector('.new-book-form');
-const newBookButton = document.querySelector('.fa-plus');
-const submitBtn = document.querySelector('.submit');
-const overlay = document.querySelector('.overlay');
-const inputs = document.querySelectorAll('input');
+const inputForm = {
+  bindEvents() {
+    this.newBookButton.addEventListener('click', () => {
+      this.form.style.visibility = 'visible';
+      this.overlay.style.visibility = 'visible';
+    });
 
-newBookButton.addEventListener('click', () => {
-  form.style.visibility = 'visible';
-  overlay.style.visibility = 'visible';
-});
+    this.submitBtn.addEventListener('click', () => {
+      const itemArray = Array.from(this.inputs);
+      const test = itemArray.every((item) => item.value !== '');
 
-submitBtn.addEventListener('click', () => {
-  const itemArray = Array.from(inputs);
-  const test = itemArray.every((item) => item.value !== '');
+      if (test) {
+        this.form.style.visibility = 'hidden';
+        this.overlay.style.visibility = 'hidden';
+      }
+    });
 
-  if (test) {
-    form.style.visibility = 'hidden';
-    overlay.style.visibility = 'hidden';
-  }
-});
+    this.overlay.addEventListener('click', () => {
+      if (this.form.style.visibility === 'visible') {
+        this.form.style.visibility = 'hidden';
+        this.overlay.style.visibility = 'hidden';
+      }
+    });
+  },
 
-overlay.addEventListener('click', () => {
-  if (form.style.visibility === 'visible') {
-    form.style.visibility = 'hidden';
-    overlay.style.visibility = 'hidden';
-  }
-});
+  CacheDom() {
+    this.form = document.querySelector('.new-book-form');
+    this.newBookButton = document.querySelector('.fa-plus');
+    this.submitBtn = document.querySelector('.submit');
+    this.overlay = document.querySelector('.overlay');
+    this.inputs = document.querySelectorAll('input');
+  },
+
+  init() {
+    this.CacheDom();
+    this.bindEvents();
+  },
+};
+
+inputForm.init();
