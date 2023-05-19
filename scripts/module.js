@@ -40,33 +40,46 @@ const library = (() => {
     bookList.appendChild(div);
   }
 
-  function checkControls(bookList) {
-    // refactor this so its not two of the same things
-    const xMarks = document.querySelectorAll('.fa-circle-xmark');
-    xMarks.forEach((element) => {
-      element.addEventListener('click', () => {
-        const mark = element;
-        mark.style.color = 'red';
-      });
-    });
+  function deleteCardFromMyLibrary({ ...elements }) {
+    const { bookToRemove, bookList, cardIndex, books } = elements;
+    if (myLibrary.length === 1) {
+      myLibrary.length = 0;
+      bookList.removeChild(books[0]);
+    } else {
+      myLibrary.splice(cardIndex - 1, 1);
+      bookList.removeChild(bookToRemove);
+    }
+  }
 
-    const checkMarks = document.querySelectorAll('.fa-circle-check');
-    checkMarks.forEach((element) => {
-      element.addEventListener('click', () => {
-        const mark = element;
-        mark.style.color = 'green';
+  function deleteCardFromDOM(elementToRemove, bookList) {
+    const card = elementToRemove;
+    const cardIndex = card.dataset.index;
+    const books = bookList.children;
+    const bookToRemove = books[cardIndex - 1];
+    deleteCardFromMyLibrary({ bookToRemove, bookList, cardIndex, books });
+  }
+
+  function bindControlEvents(bookList) {
+    const marks = document.querySelectorAll('.fa-regular');
+    marks.forEach((mark) => {
+      mark.addEventListener('click', (e) => {
+        const { className } = e.target;
+
+        if (className === 'fa-sharp fa-regular fa-circle-xmark') {
+          e.target.style.color = 'red';
+          // to do: add read function that sets book object to read. probably need to add 'read' prop in FF
+        } else {
+          e.target.style.color = 'green';
+          // to do: add read function that sets book object to read
+        }
+        // do to: if user swithes from not read to read and vice versa change marks
       });
     });
 
     const removeButtons = document.querySelectorAll('.remove-btn');
-    removeButtons.forEach((element) => {
-      element.addEventListener('click', () => {
-        const card = element;
-        const cardIndex = card.dataset.index;
-        myLibrary.splice(cardIndex, 1);
-        const books = bookList.children;
-        const bookToRemove = books[cardIndex];
-        bookList.removeChild(bookToRemove);
+    removeButtons.forEach((elementToRemove) => {
+      elementToRemove.addEventListener('click', () => {
+        deleteCardFromDOM(elementToRemove, bookList);
       });
     });
   }
@@ -79,7 +92,7 @@ const library = (() => {
     myLibrary.forEach((book, i) => {
       createBookCard(book, i, bookList);
     });
-    checkControls(bookList);
+    bindControlEvents(bookList);
   }
 
   function addBookToLibrary(newBook) {
@@ -93,24 +106,23 @@ const library = (() => {
     const author = document.querySelector('.new-author').value;
     const pages = document.querySelector('.new-pages').value;
     const newBook = makeBook(title, author, pages);
-    // console.log(newBook);
     addBookToLibrary(newBook);
   }
 
-  function bindEvents(bookForm) {
+  function bindFormEvents(bookForm) {
     bookForm.addEventListener('submit', (e) => {
       e.preventDefault();
       getNewUserBook();
     });
   }
 
-  function cacheDom() {
+  function cacheForm() {
     const bookform = document.querySelector('.new-book-form');
-    bindEvents(bookform);
+    bindFormEvents(bookform);
   }
 
   function init() {
-    cacheDom();
+    cacheForm();
   }
 
   return { init };
