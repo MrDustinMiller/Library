@@ -12,12 +12,14 @@ const inputForm = {
       if (test) {
         this.form.style.visibility = 'hidden';
         this.overlay.style.visibility = 'hidden';
+        this.formWrapper.style.visibility = 'hidden';
       }
     });
 
     this.overlay.addEventListener('click', () => {
       if (this.form.style.visibility === 'visible') {
         this.form.style.visibility = 'hidden';
+        this.formWrapper.style.visibility = 'hidden';
         this.overlay.style.visibility = 'hidden';
       }
     });
@@ -25,6 +27,7 @@ const inputForm = {
 
   CacheDom() {
     this.form = document.querySelector('.new-book-form');
+    this.formWrapper = document.querySelector('.form-content');
     this.newBookButton = document.querySelector('.fa-plus');
     this.submitBtn = document.querySelector('.submit');
     this.overlay = document.querySelector('.overlay');
