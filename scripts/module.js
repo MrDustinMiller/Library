@@ -127,20 +127,19 @@ const library = (() => {
 
   function addBookToLibrary(newBook) {
     const newUserBook = newBook;
+    const check = myLibrary.some(
+      (book) =>
+        book.title === newUserBook.title && book.author === newUserBook.author
+    );
+
+    if (check) {
+      alert(
+        `You already have "${newUserBook.title}" by ${newUserBook.author} saved!`
+      );
+      return;
+    }
+
     myLibrary.push(newUserBook);
-    // console.log(myLibrary);
-
-    // logic is wrong here
-    // if (myLibrary.length > 1) {
-    //   const check = myLibrary.some((book) => book === newUserBook);
-    //   if (check) {
-    //     alert(`you already have  ${JSON.stringify(newUserBook)} saved!`);
-    //     myLibrary.pop();
-    //     console.log(myLibrary);
-    //     return;
-    //   }
-    // }
-
     updateLocalStorageLibrary();
     displayBooks();
   }
