@@ -17,8 +17,8 @@ in their library.
 ## Future Updates
 
 - [] Build option for users to log in to individual account.
-- [] Build option to store each book in database.
-- [] Track state of books that have been read.
+- [x] Build option to store each book in local storage.
+- [x] Track state of books that have been read.
 
 ## 🤝 Support
 
