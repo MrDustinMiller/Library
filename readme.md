@@ -19,6 +19,7 @@ in their library.
 - [] Build option for users to log in to individual account.
 - [x] Build option to store each book in local storage.
 - [x] Track state of books that have been read.
+- [x] Display saved books on page load with appropriate read status.
 
 ## 🤝 Support
 
