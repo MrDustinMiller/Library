@@ -40,4 +40,4 @@ const inputForm = {
   },
 };
 
-inputForm.init();
+export default inputForm;
