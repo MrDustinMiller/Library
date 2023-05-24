@@ -1,5 +1,11 @@
 const library = (() => {
-  const makeBook = (title, author, pages) => ({ title, author, pages });
+  const makeBook = (title, author, pages) => ({
+    title,
+    author,
+    pages,
+    read: false,
+  });
+
   const myLibrary = [];
 
   function createBookCard(book, i, bookList) {
@@ -40,46 +46,63 @@ const library = (() => {
     bookList.appendChild(div);
   }
 
-  function deleteCardFromMyLibrary({ ...elements }) {
+  function updateLocalStorageLibrary() {
+    localStorage.setItem('card', JSON.stringify(myLibrary));
+  }
+
+  function deleteCardFromMyLibraryAndDOM({ ...elements }) {
     const { bookToRemove, bookList, cardIndex, books } = elements;
+
     if (myLibrary.length === 1) {
       myLibrary.length = 0;
       bookList.removeChild(books[0]);
+      updateLocalStorageLibrary();
     } else {
-      myLibrary.splice(cardIndex - 1, 1);
+      myLibrary.splice(cardIndex, 1);
       bookList.removeChild(bookToRemove);
+      updateLocalStorageLibrary();
     }
   }
 
-  function deleteCardFromDOM(elementToRemove, bookList) {
+  function getCardIndexAndBookToRemove(elementToRemove, bookList) {
     const card = elementToRemove;
     const cardIndex = card.dataset.index;
     const books = bookList.children;
-    const bookToRemove = books[cardIndex - 1];
-    deleteCardFromMyLibrary({ bookToRemove, bookList, cardIndex, books });
+    const bookToRemove = books[cardIndex];
+    deleteCardFromMyLibraryAndDOM({ bookToRemove, bookList, cardIndex, books });
+  }
+
+  function changeStatusToRead(e) {
+    const cardIndex = e.target.dataset.index;
+    if (!myLibrary[cardIndex].read) {
+      myLibrary[cardIndex].read = true;
+    } else myLibrary[cardIndex].read = false;
+    updateLocalStorageLibrary();
   }
 
   function bindControlEvents(bookList) {
     const marks = document.querySelectorAll('.fa-regular');
+
     marks.forEach((mark) => {
       mark.addEventListener('click', (e) => {
         const { className } = e.target;
 
         if (className === 'fa-sharp fa-regular fa-circle-xmark') {
           e.target.style.color = 'red';
-          // to do: add read function that sets book object to read. probably need to add 'read' prop in FF
+          e.target.nextSibling.style.color = '';
+          changeStatusToRead(e);
         } else {
           e.target.style.color = 'green';
-          // to do: add read function that sets book object to read
+          e.target.previousSibling.style.color = '';
+          changeStatusToRead(e);
         }
-        // do to: if user swithes from not read to read and vice versa change marks
       });
     });
 
     const removeButtons = document.querySelectorAll('.remove-btn');
     removeButtons.forEach((elementToRemove) => {
       elementToRemove.addEventListener('click', () => {
-        deleteCardFromDOM(elementToRemove, bookList);
+        getCardIndexAndBookToRemove(elementToRemove, bookList);
       });
     });
   }
@@ -98,6 +121,20 @@ const library = (() => {
   function addBookToLibrary(newBook) {
     const newUserBook = newBook;
     myLibrary.push(newUserBook);
+    // console.log(myLibrary);
+
+    // logic is wrong here
+    // if (myLibrary.length > 1) {
+    //   const check = myLibrary.some((book) => book === newUserBook);
+    //   if (check) {
+    //     alert(`you already have  ${JSON.stringify(newUserBook)} saved!`);
+    //     myLibrary.pop();
+    //     console.log(myLibrary);
+    //     return;
+    //   }
+    // }
+
+    updateLocalStorageLibrary();
     displayBooks();
   }
 
@@ -116,6 +153,18 @@ const library = (() => {
     });
   }
 
+  function displayBooksInLocalStorage() {
+    const booksInStorage = JSON.parse(localStorage.getItem('card'));
+
+    if (booksInStorage) {
+      booksInStorage.forEach((book) => {
+        myLibrary.push(book);
+      });
+    }
+
+    displayBooks();
+  }
+
   function cacheForm() {
     const bookform = document.querySelector('.new-book-form');
     bindFormEvents(bookform);
@@ -123,6 +172,7 @@ const library = (() => {
 
   function init() {
     cacheForm();
+    displayBooksInLocalStorage();
   }
 
   return { init };
