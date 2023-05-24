@@ -1,4 +1,6 @@
 const library = (() => {
+  const myLibrary = [];
+
   const makeBook = (title, author, pages) => ({
     title,
     author,
@@ -6,7 +8,12 @@ const library = (() => {
     read: false,
   });
 
-  const myLibrary = [];
+  function checkForReadStatus(book, ...mark) {
+    const [marks] = mark;
+    if (book.read === false) {
+      marks.xMark.style.color = 'red';
+    } else marks.checkMark.style.color = 'green';
+  }
 
   function createBookCard(book, i, bookList) {
     const newCard = document.createElement('div');
@@ -44,6 +51,7 @@ const library = (() => {
     div.setAttribute('data-index', `${i}`);
     div.append(newCard);
     bookList.appendChild(div);
+    checkForReadStatus(book, { xMark, checkMark });
   }
 
   function updateLocalStorageLibrary() {
@@ -82,7 +90,6 @@ const library = (() => {
 
   function bindControlEvents(bookList) {
     const marks = document.querySelectorAll('.fa-regular');
-
     marks.forEach((mark) => {
       mark.addEventListener('click', (e) => {
         const { className } = e.target;
