@@ -184,4 +184,4 @@ const library = (() => {
   return { init };
 })();
 
-library.init();
+export default library;
